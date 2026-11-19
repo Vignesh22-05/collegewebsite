@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    tasks.register('copyToDocs', Copy) {
+        from('src/main/resources') {
+            include '**/*'
+        }
+        into "${projectDir}/docs"
+    }
+
+    tasks.named('processResources') {
+        finalizedBy('copyToDocs')
+    }
+
+}
+
+test {
+    useJUnitPlatform()
+}
