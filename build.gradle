@@ -1,28 +1,14 @@
 plugins {
-    id 'java'
+    id("org.ajoberstar.git-publish") version "4.2.2"
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
 
-dependencies {
-    tasks.register('copyToDocs', Copy) {
-        from('src/main/resources') {
-            include '**/*'
-        }
-        into "${projectDir}/docs"
+
+gitPublish {
+    repoUri = 'https://github.com'
+    branch = 'gh-pages'
+    contents {
+        from ' https://vignesh22-05.github.io/collegewebsite/' // Replace with your generated website output folder
     }
-
-    tasks.named('processResources') {
-        finalizedBy('copyToDocs')
-    }
-
-}
-
-test {
-    useJUnitPlatform()
 }
